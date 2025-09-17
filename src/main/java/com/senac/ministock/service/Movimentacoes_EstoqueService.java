@@ -5,6 +5,7 @@ import com.senac.ministock.dto.response.Movimentacoes_EstoqueDTOResponse;
 import com.senac.ministock.dto.response.Movimentacoes_EstoqueDTOUpdateResponse;
 import com.senac.ministock.entity.Movimentacoes_Estoque;
 import com.senac.ministock.entity.Produto;
+import com.senac.ministock.entity.Tipo;
 import com.senac.ministock.entity.Usuario;
 import com.senac.ministock.repository.Movimentacoes_EstoqueRepository;
 import com.senac.ministock.repository.ProdutoRepository;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -50,24 +52,45 @@ public class Movimentacoes_EstoqueService {
 
     @Transactional
     public Movimentacoes_EstoqueDTOResponse criarMovimentacao(Movimentacoes_EstoqueDTORequest dto) {
-        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não encontrado"));
+        Movimentacoes_Estoque movimentacao = new Movimentacoes_Estoque();
+        movimentacao.setTipo(dto.getTipo() != null ? dto.getTipo() : Tipo.informativo);
+        movimentacao.setQuantidade(dto.getQuantidade() != null ? dto.getQuantidade() : 0);
+        movimentacao.setDataMovimentacao(dto.getDataMovimentacao() != null ? dto.getDataMovimentacao() : new Date());
+        movimentacao.setObservacao(dto.getObservacao());
+        movimentacao.setPrecoCompra(dto.getPrecoCompra());
+        movimentacao.setPrecoVenda(dto.getPrecoVenda());
+        movimentacao.setStatus(dto.getStatus() != null ? dto.getStatus() : 1);
 
-        Produto produto = produtoRepository.findById(dto.getProdutoId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Produto não encontrado"));
+        if (dto.getUsuarioId() != null) {
+            Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não encontrado"));
+            movimentacao.setUsuario(usuario);
+        }
 
-        Movimentacoes_Estoque movimentacao = modelMapper.map(dto, Movimentacoes_Estoque.class);
-        movimentacao.setUsuario(usuario);
-        movimentacao.setProduto(produto);
+        if (dto.getProdutoId() != null) {
+            Produto produto = produtoRepository.findById(dto.getProdutoId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Produto não encontrado"));
+            movimentacao.setProduto(produto);
+        }
 
-        Movimentacoes_Estoque salva = movimentacoesRepository.save(movimentacao);
-        return modelMapper.map(salva, Movimentacoes_EstoqueDTOResponse.class);
+        movimentacoesRepository.save(movimentacao);
+        return new Movimentacoes_EstoqueDTOResponse(movimentacao);
     }
+
+
 
     @Transactional
     public Movimentacoes_EstoqueDTOResponse atualizarMovimentacao(Integer id, Movimentacoes_EstoqueDTORequest dto) {
-        Movimentacoes_Estoque movimentacao = movimentacoesRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movimentação não encontrada"));
+        Movimentacoes_Estoque movimentacao = movimentacoesRepository.obterMovimentacaoPeloId(id);
+        movimentacao.setTipo(dto.getTipo() != null ? dto.getTipo() : Tipo.informativo);
+        movimentacao.setQuantidade(dto.getQuantidade() != null ? dto.getQuantidade() : 0);
+        movimentacao.setDataMovimentacao(dto.getDataMovimentacao() != null ? dto.getDataMovimentacao() : new Date());
+        movimentacao.setObservacao(dto.getObservacao());
+        movimentacao.setPrecoCompra(dto.getPrecoCompra());
+        movimentacao.setPrecoVenda(dto.getPrecoVenda());
+        movimentacao.setStatus(dto.getStatus() != null ? dto.getStatus() : 1);
+
+
 
         modelMapper.map(dto, movimentacao);
 

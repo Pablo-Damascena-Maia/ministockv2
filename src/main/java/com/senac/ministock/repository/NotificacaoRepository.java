@@ -19,7 +19,7 @@ public interface NotificacaoRepository extends JpaRepository<Notificacao, Intege
     @Query("UPDATE Notificacao n SET n.status = -1 WHERE n.id = :id")
     void apagadoLogicoNotificacao(@Param("id") Integer id);
 
-    // Listar apenas notificações ativas
+
     @Query("SELECT n FROM Notificacao n WHERE n.status >= 0")
     List<Notificacao> listarNotificacoes();
 

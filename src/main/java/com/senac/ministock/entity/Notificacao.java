@@ -21,7 +21,7 @@ public class Notificacao {
 
     @Enumerated(EnumType.STRING)
     @Column(name="notificacao_tipo", nullable = false)
-    private Tipo tipo = Tipo.informativo; // default igual ao banco
+    private Tipo tipo = Tipo.INFORMATIVO; // default igual ao banco
 
     @Column(name="notificacao_lida")
     private Integer lida;

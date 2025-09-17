@@ -25,6 +25,6 @@ public interface ConfiguracaoRepository extends JpaRepository<Configuracao, Inte
     @Query("SELECT c FROM Configuracao c WHERE c.configuracaoId = :id AND c.status >= 0")
     Configuracao obterConfiguracaoPeloId(@Param("id") Integer configuracaoId);
 
-    boolean existsByConfiguracaoValor(String configuracaoValor);
+
 
 }

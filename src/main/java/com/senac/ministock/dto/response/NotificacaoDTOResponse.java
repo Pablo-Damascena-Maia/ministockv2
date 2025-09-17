@@ -1,78 +1,57 @@
 package com.senac.ministock.dto.response;
 
-import java.time.LocalDateTime;
+import com.senac.ministock.entity.Tipo;
+import java.util.Date;
 
 public class NotificacaoDTOResponse {
+
     private Integer id;
     private String titulo;
     private String mensagem;
-    private String tipo;
-    private Boolean lida;
-    private LocalDateTime dataCriacao;
-    private  Integer status;
-    private String usuarioId;
+    private Tipo tipo;
+    private Integer lida;
+    private Date dataCriacao;
+    private Integer status;
+    private Integer usuarioId;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
+    public NotificacaoDTOResponse() {}
+
+
+    public NotificacaoDTOResponse(Integer id, String titulo, String mensagem, Tipo tipo,
+                                  Integer lida, Date dataCriacao, Integer status, Integer usuarioId) {
         this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public Boolean getLida() {
-        return lida;
-    }
-
-    public void setLida(Boolean lida) {
         this.lida = lida;
-    }
-
-    public LocalDateTime getDataCriacao() {
-        return dataCriacao;
-    }
-
-    public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public String getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(String usuarioId) {
         this.usuarioId = usuarioId;
     }
+
+
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
+
+    public String getTitulo() { return titulo; }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
+
+    public String getMensagem() { return mensagem; }
+    public void setMensagem(String mensagem) { this.mensagem = mensagem; }
+
+    public Tipo getTipo() { return tipo; }
+    public void setTipo(Tipo tipo) { this.tipo = tipo; }
+
+    public Integer getLida() { return lida; }
+    public void setLida(Integer lida) { this.lida = lida; }
+
+    public Date getDataCriacao() { return dataCriacao; }
+    public void setDataCriacao(Date dataCriacao) { this.dataCriacao = dataCriacao; }
+
+    public Integer getStatus() { return status; }
+    public void setStatus(Integer status) { this.status = status; }
+
+    public Integer getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(Integer usuarioId) { this.usuarioId = usuarioId; }
 }

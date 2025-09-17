@@ -1,50 +1,45 @@
 package com.senac.ministock.dto.request;
 
-public class Movimentacoes_EstoqueDTORequest {
+import com.senac.ministock.entity.Tipo;
+import java.util.Date;
 
+public class Movimentacoes_EstoqueDTORequest {
+    private Tipo tipo;
+    private Integer quantidade;
+    private Date dataMovimentacao;
+    private String observacao;
+    private Double precoCompra;
+    private Double precoVenda;
+    private Integer status;
     private Integer usuarioId;
     private Integer produtoId;
-    private Integer quantidade;
-    private String tipoMovimentacao; // ex: "ENTRADA" ou "SAIDA"
-    private Integer status; // 1 = ativo, 0 = inativo, -1 = apagado
 
-    public Integer getUsuarioId() {
-        return usuarioId;
-    }
+    public Movimentacoes_EstoqueDTORequest() {}
 
-    public void setUsuarioId(Integer usuarioId) {
-        this.usuarioId = usuarioId;
-    }
+    public Tipo getTipo() { return tipo; }
+    public void setTipo(Tipo tipo) { this.tipo = tipo; }
 
-    public Integer getProdutoId() {
-        return produtoId;
-    }
+    public Integer getQuantidade() { return quantidade; }
+    public void setQuantidade(Integer quantidade) { this.quantidade = quantidade; }
 
-    public void setProdutoId(Integer produtoId) {
-        this.produtoId = produtoId;
-    }
+    public Date getDataMovimentacao() { return dataMovimentacao; }
+    public void setDataMovimentacao(Date dataMovimentacao) { this.dataMovimentacao = dataMovimentacao; }
 
-    public Integer getQuantidade() {
-        return quantidade;
-    }
+    public String getObservacao() { return observacao; }
+    public void setObservacao(String observacao) { this.observacao = observacao; }
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
+    public Double getPrecoCompra() { return precoCompra; }
+    public void setPrecoCompra(Double precoCompra) { this.precoCompra = precoCompra; }
 
-    public String getTipoMovimentacao() {
-        return tipoMovimentacao;
-    }
+    public Double getPrecoVenda() { return precoVenda; }
+    public void setPrecoVenda(Double precoVenda) { this.precoVenda = precoVenda; }
 
-    public void setTipoMovimentacao(String tipoMovimentacao) {
-        this.tipoMovimentacao = tipoMovimentacao;
-    }
+    public Integer getStatus() { return status; }
+    public void setStatus(Integer status) { this.status = status; }
 
-    public Integer getStatus() {
-        return status;
-    }
+    public Integer getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(Integer usuarioId) { this.usuarioId = usuarioId; }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+    public Integer getProdutoId() { return produtoId; }
+    public void setProdutoId(Integer produtoId) { this.produtoId = produtoId; }
 }

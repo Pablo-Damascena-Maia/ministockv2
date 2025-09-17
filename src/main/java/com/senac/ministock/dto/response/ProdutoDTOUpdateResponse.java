@@ -2,14 +2,14 @@ package com.senac.ministock.dto.response;
 
 public class ProdutoDTOUpdateResponse {
 
-    public void setId(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setId'");
+    private  Integer status;
+
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setStatus(Object status) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setStatus'");
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
 }
