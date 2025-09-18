@@ -3,9 +3,9 @@ package com.senac.ministock.service;
 import com.senac.ministock.dto.request.NotificacaoDTORequest;
 import com.senac.ministock.dto.response.NotificacaoDTOResponse;
 import com.senac.ministock.dto.response.NotificacaoDTOUpdateResponse;
-import com.senac.ministock.entity.Notificacao;
-import com.senac.ministock.entity.Tipo;
-import com.senac.ministock.entity.Usuario;
+import com.senac.ministock.repository.entity.Notificacao;
+import com.senac.ministock.repository.entity.TipoN;
+import com.senac.ministock.repository.entity.Usuario;
 import com.senac.ministock.repository.NotificacaoRepository;
 import com.senac.ministock.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -48,7 +48,7 @@ public class NotificacaoService {
         Notificacao n = new Notificacao();
         n.setTitulo(dto.getTitulo());
         n.setMensagem(dto.getMensagem());
-        n.setTipo(dto.getTipo() != null ? dto.getTipo() : Tipo.informativo);
+        n.setTipoN(dto.getTipoN() != null ? dto.getTipoN() : TipoN.INFORMATIVO);
         n.setLida(dto.getLida() != null ? dto.getLida() : 0);
         n.setStatus(dto.getStatus() != null ? dto.getStatus() : 1);
 
@@ -66,7 +66,7 @@ public class NotificacaoService {
                 saved.getId(),
                 saved.getTitulo(),
                 saved.getMensagem(),
-                saved.getTipo(),
+                saved.getTipoN(),
                 saved.getLida(),
                 saved.getDataCriacao(),
                 saved.getStatus(),
@@ -80,7 +80,7 @@ public class NotificacaoService {
         Notificacao n = notificacaoRepository.obterNotificacaoPeloId(notificacaoId);
         n.setTitulo(dto.getTitulo());
         n.setMensagem(dto.getMensagem());
-        n.setTipo(dto.getTipo() != null ? dto.getTipo() : Tipo.informativo);
+        n.setTipoN(dto.getTipoN() != null ? dto.getTipoN() : TipoN.INFORMATIVO);
         n.setLida(dto.getLida() != null ? dto.getLida() : 0);
         n.setStatus(dto.getStatus() != null ? dto.getStatus() : 1);
 

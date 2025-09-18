@@ -1,7 +1,7 @@
 package com.senac.ministock.dto.response;
 
-import com.senac.ministock.entity.Movimentacoes_Estoque;
-import com.senac.ministock.entity.Tipo;
+import com.senac.ministock.repository.entity.Movimentacoes_Estoque;
+import com.senac.ministock.repository.entity.TipoM;
 
 import java.util.Date;
 
@@ -10,7 +10,7 @@ public class Movimentacoes_EstoqueDTOResponse {
     private Integer id;
     private Integer usuarioId;
     private Integer produtoId;
-    private Tipo tipo;
+    private TipoM tipoM;
     private Integer quantidade;
     private Date dataMovimentacao;
     private String observacao;
@@ -18,7 +18,7 @@ public class Movimentacoes_EstoqueDTOResponse {
     private Double precoVenda;
     private Integer status;
 
-    public Movimentacoes_EstoqueDTOResponse(int id, Tipo tipo, int quantidade, Date dataMovimentacao, String observacao, Double precoCompra, Double precoVenda, Integer status, int id1, int id2) {
+    public Movimentacoes_EstoqueDTOResponse(int id, TipoM tipoM, int quantidade, Date dataMovimentacao, String observacao, Double precoCompra, Double precoVenda, Integer status, int id1, int id2) {
     }
 
     public Movimentacoes_EstoqueDTOResponse(Movimentacoes_Estoque movimentacao) {
@@ -49,12 +49,12 @@ public class Movimentacoes_EstoqueDTOResponse {
         this.produtoId = produtoId;
     }
 
-    public Tipo getTipo() {
-        return tipo;
+    public TipoM getTipoM() {
+        return tipoM;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
+    public void setTipoM(TipoM tipoM) {
+        this.tipoM = tipoM;
     }
 
     public Integer getQuantidade() {

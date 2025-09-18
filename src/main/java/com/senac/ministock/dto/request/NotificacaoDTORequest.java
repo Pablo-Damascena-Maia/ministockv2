@@ -1,12 +1,13 @@
 package com.senac.ministock.dto.request;
 
-import com.senac.ministock.entity.Tipo;
+import com.senac.ministock.repository.entity.TipoN;
+
 
 public class NotificacaoDTORequest {
 
     private String titulo;
     private String mensagem;
-    private Tipo tipo; // INFO, ALERTA, ERRO
+    private TipoN tipoN;
     private Integer  lida;
     private Integer usuarioId;
     private Integer status;
@@ -27,12 +28,12 @@ public class NotificacaoDTORequest {
         this.mensagem = mensagem;
     }
 
-    public Tipo getTipo() {
-        return tipo;
+    public TipoN getTipoN() {
+        return tipoN;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
+    public void setTipoN(TipoN tipoN) {
+        this.tipoN = tipoN;
     }
 
     public Integer getLida() {

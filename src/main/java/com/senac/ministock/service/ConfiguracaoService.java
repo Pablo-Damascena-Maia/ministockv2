@@ -3,7 +3,7 @@ package com.senac.ministock.service;
 import com.senac.ministock.dto.request.ConfiguracaoDTORequest;
 import com.senac.ministock.dto.response.ConfiguracaoDTOResponse;
 import com.senac.ministock.dto.response.ConfiguracaoDTOUpdateResponse;
-import com.senac.ministock.entity.Configuracao;
+import com.senac.ministock.repository.entity.Configuracao;
 import com.senac.ministock.repository.ConfiguracaoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

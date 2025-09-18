@@ -3,7 +3,7 @@ package com.senac.ministock.service;
 import com.senac.ministock.dto.request.UsuarioDTORequest;
 import com.senac.ministock.dto.response.UsuarioDTOResponse;
 import com.senac.ministock.dto.response.UsuarioDTOUpdateResponse;
-import com.senac.ministock.entity.Usuario;
+import com.senac.ministock.repository.entity.Usuario;
 import com.senac.ministock.repository.UsuarioRepository;
 import com.senac.ministock.util.HashUtil;
 import jakarta.transaction.Transactional;

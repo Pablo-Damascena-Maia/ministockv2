@@ -3,10 +3,10 @@ package com.senac.ministock.service;
 import com.senac.ministock.dto.request.Movimentacoes_EstoqueDTORequest;
 import com.senac.ministock.dto.response.Movimentacoes_EstoqueDTOResponse;
 import com.senac.ministock.dto.response.Movimentacoes_EstoqueDTOUpdateResponse;
-import com.senac.ministock.entity.Movimentacoes_Estoque;
-import com.senac.ministock.entity.Produto;
-import com.senac.ministock.entity.Tipo;
-import com.senac.ministock.entity.Usuario;
+import com.senac.ministock.repository.entity.Movimentacoes_Estoque;
+import com.senac.ministock.repository.entity.Produto;
+import com.senac.ministock.repository.entity.TipoM;
+import com.senac.ministock.repository.entity.Usuario;
 import com.senac.ministock.repository.Movimentacoes_EstoqueRepository;
 import com.senac.ministock.repository.ProdutoRepository;
 import com.senac.ministock.repository.UsuarioRepository;
@@ -53,7 +53,7 @@ public class Movimentacoes_EstoqueService {
     @Transactional
     public Movimentacoes_EstoqueDTOResponse criarMovimentacao(Movimentacoes_EstoqueDTORequest dto) {
         Movimentacoes_Estoque movimentacao = new Movimentacoes_Estoque();
-        movimentacao.setTipo(dto.getTipo() != null ? dto.getTipo() : Tipo.informativo);
+        movimentacao.setTipoM(dto.getTipoM() != null ? dto.getTipoM() : TipoM.AJUSTE);
         movimentacao.setQuantidade(dto.getQuantidade() != null ? dto.getQuantidade() : 0);
         movimentacao.setDataMovimentacao(dto.getDataMovimentacao() != null ? dto.getDataMovimentacao() : new Date());
         movimentacao.setObservacao(dto.getObservacao());
@@ -82,7 +82,7 @@ public class Movimentacoes_EstoqueService {
     @Transactional
     public Movimentacoes_EstoqueDTOResponse atualizarMovimentacao(Integer id, Movimentacoes_EstoqueDTORequest dto) {
         Movimentacoes_Estoque movimentacao = movimentacoesRepository.obterMovimentacaoPeloId(id);
-        movimentacao.setTipo(dto.getTipo() != null ? dto.getTipo() : Tipo.informativo);
+        movimentacao.setTipoM(dto.getTipoM() != null ? dto.getTipoM() : TipoM.AJUSTE);
         movimentacao.setQuantidade(dto.getQuantidade() != null ? dto.getQuantidade() : 0);
         movimentacao.setDataMovimentacao(dto.getDataMovimentacao() != null ? dto.getDataMovimentacao() : new Date());
         movimentacao.setObservacao(dto.getObservacao());
