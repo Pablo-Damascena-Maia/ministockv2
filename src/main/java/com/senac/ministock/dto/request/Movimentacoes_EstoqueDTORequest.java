@@ -1,7 +1,7 @@
 package com.senac.ministock.dto.request;
 
 
-import com.senac.ministock.repository.entity.TipoM;
+import com.senac.ministock.entity.TipoM;
 
 import java.util.Date;
 

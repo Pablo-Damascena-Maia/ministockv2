@@ -1,6 +1,6 @@
 package com.senac.ministock.repository;
 
-import com.senac.ministock.repository.entity.Produto;
+import com.senac.ministock.entity.Produto;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

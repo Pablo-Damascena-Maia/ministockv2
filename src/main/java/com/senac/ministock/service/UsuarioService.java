@@ -1,21 +1,32 @@
 package com.senac.ministock.service;
 
 import com.senac.ministock.dto.request.UsuarioDTORequest;
+import com.senac.ministock.dto.request.UsuarioEmailDTORequest;
 import com.senac.ministock.dto.response.UsuarioDTOResponse;
 import com.senac.ministock.dto.response.UsuarioDTOUpdateResponse;
-import com.senac.ministock.repository.entity.Usuario;
+import com.senac.ministock.dto.response.UsuarioEmailDTOResponse;
+import com.senac.ministock.entity.Usuario;
 import com.senac.ministock.repository.UsuarioRepository;
 import com.senac.ministock.util.HashUtil;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @Service
-public class UsuarioService {
+public class    UsuarioService {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtTokenService jwtTokenService;
 
     private final UsuarioRepository usuarioRepository;
     private final ModelMapper modelMapper;
@@ -65,7 +76,6 @@ public class UsuarioService {
         }
 
 
-
         modelMapper.map(dto, usuario);
 
         if (dto.getSenha() != null && !dto.getSenha().isBlank()) {
@@ -95,5 +105,20 @@ public class UsuarioService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
         }
         usuarioRepository.apagadoLogicoUsuario(id);
+    }
+
+    public UsuarioEmailDTORequest email(UsuarioEmailDTORequest usuarioEmailDTORequest) {
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                new UsernamePasswordAuthenticationToken(usuarioEmailDTORequest.getEmail(), usuarioEmailDTORequest.getSenha());
+
+        Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+
+        UsuarioDetailsImpl userDetails = (UsuarioDetailsImpl) authentication.getPrincipal();
+
+        UsuarioEmailDTOResponse usuarioEmailDTOResponse = new UsuarioEmailDTOResponse();
+        usuarioEmailDTOResponse.setId(userDetails.getIdUsuario());
+        usuarioEmailDTOResponse.setNome(userDetails.getNomeUsuario());
+        usuarioEmailDTOResponse.setToken(jwtTokenService.generateToken(userDetails));
+        return usuarioEmailDTORequest;
     }
 }

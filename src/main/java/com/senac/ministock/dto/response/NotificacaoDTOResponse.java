@@ -1,6 +1,6 @@
 package com.senac.ministock.dto.response;
 
-import com.senac.ministock.repository.entity.TipoN;
+import com.senac.ministock.entity.TipoN;
 
 import java.util.Date;
 

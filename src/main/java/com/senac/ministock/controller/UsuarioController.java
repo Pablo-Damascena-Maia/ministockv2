@@ -1,6 +1,7 @@
 package com.senac.ministock.controller;
 
 import com.senac.ministock.dto.request.UsuarioDTORequest;
+import com.senac.ministock.dto.request.UsuarioEmailDTORequest;
 import com.senac.ministock.dto.response.UsuarioDTOResponse;
 import com.senac.ministock.dto.response.UsuarioDTOUpdateResponse;
 import com.senac.ministock.service.UsuarioService;
@@ -64,5 +65,12 @@ public class UsuarioController {
     public ResponseEntity<Void> apagar(@PathVariable("id") Integer id) {
         usuarioService.apagarUsuario(id);
         return ResponseEntity.noContent().build();
+
+    }
+
+    @PostMapping("/email")
+    public ResponseEntity<UsuarioEmailDTORequest>email(@RequestBody UsuarioEmailDTORequest usuarioEmailDTORequest){
+        return ResponseEntity.ok(usuarioService.email(usuarioEmailDTORequest));
+
     }
 }

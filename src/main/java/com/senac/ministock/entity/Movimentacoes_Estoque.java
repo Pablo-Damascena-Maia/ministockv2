@@ -14,8 +14,8 @@ public class Movimentacoes_Estoque {
     private int id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="movimentacoes_estoque_tipo")
-    private Tipo tipo;
+    @Column(name="movimentacoes_estoque_tipo_movimentacao")
+    private TipoM tipoM;
 
     @Column(name="movimentacoes_estoque_quantidade")
     private int quantidade;
@@ -52,12 +52,12 @@ public class Movimentacoes_Estoque {
         this.id = id;
     }
 
-    public Tipo getTipo() {
-        return tipo;
+    public TipoM getTipoM() {
+        return tipoM;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
+    public void setTipoM(TipoM tipoM) {
+        this.tipoM = tipoM;
     }
 
     public int getQuantidade() {

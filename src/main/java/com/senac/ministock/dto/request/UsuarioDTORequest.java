@@ -1,5 +1,7 @@
 package com.senac.ministock.dto.request;
 
+import java.util.List;
+
 public class UsuarioDTORequest {
 
     private String nome;
@@ -7,7 +9,15 @@ public class UsuarioDTORequest {
     private String senha;
     private String perfil; // ADMIN, USER, etc.
     private Integer status;
+    private List<String> rolesList;
 
+    public List<String> getRolesList() {
+        return rolesList;
+    }
+
+    public void setRolesList(List<String> rolesList) {
+        this.rolesList = rolesList;
+    }
 
     public String getNome() {
         return nome;

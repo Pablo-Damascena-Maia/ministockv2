@@ -6,10 +6,19 @@ public class UsuarioDTOResponse {
     private int id;
     private String nome;
     private String email;
+    private String senha;
     private String perfil;
     private LocalDateTime dataCriacao;
     private LocalDateTime ultimoLogin;
     private String status; // adicionei este atributo
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
     public int getId() {
         return id;

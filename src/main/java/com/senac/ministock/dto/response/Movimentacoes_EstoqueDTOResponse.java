@@ -1,7 +1,7 @@
 package com.senac.ministock.dto.response;
 
-import com.senac.ministock.repository.entity.Movimentacoes_Estoque;
-import com.senac.ministock.repository.entity.TipoM;
+import com.senac.ministock.entity.Movimentacoes_Estoque;
+import com.senac.ministock.entity.TipoM;
 
 import java.util.Date;
 

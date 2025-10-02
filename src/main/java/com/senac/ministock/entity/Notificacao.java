@@ -20,8 +20,8 @@ public class Notificacao {
     private String mensagem;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="notificacao_tipo", nullable = false)
-    private Tipo tipo = Tipo.INFORMATIVO; // default igual ao banco
+    @Column(name="notificacao_tipo_notificacao", nullable = false)
+    private TipoN tipoN = TipoN.INFORMATIVO; // default igual ao banco
 
     @Column(name="notificacao_lida")
     private Integer lida;
@@ -62,13 +62,7 @@ public class Notificacao {
         this.mensagem = mensagem;
     }
 
-    public Tipo getTipo() {
-        return tipo;
-    }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
-    }
 
     public Integer getLida() {
         return lida;
@@ -104,5 +98,13 @@ public class Notificacao {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public TipoN getTipoN() {
+        return tipoN;
+    }
+
+    public void setTipoN(TipoN tipoN) {
+        this.tipoN = tipoN;
     }
 }
