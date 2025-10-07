@@ -50,14 +50,6 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name="role_id"))
     private List<Role> roles;
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
     public int getId() {
         return id;
     }
@@ -145,4 +137,13 @@ public class Usuario {
     public void setMovimentacoesEstoques(List<Movimentacoes_Estoque> movimentacoesEstoques) {
         this.movimentacoesEstoques = movimentacoesEstoques;
     }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 }
+

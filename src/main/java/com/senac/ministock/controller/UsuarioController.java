@@ -4,6 +4,7 @@ import com.senac.ministock.dto.request.UsuarioDTORequest;
 import com.senac.ministock.dto.request.UsuarioEmailDTORequest;
 import com.senac.ministock.dto.response.UsuarioDTOResponse;
 import com.senac.ministock.dto.response.UsuarioDTOUpdateResponse;
+import com.senac.ministock.dto.response.UsuarioEmailDTOResponse;
 import com.senac.ministock.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -69,8 +70,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/email")
-    public ResponseEntity<UsuarioEmailDTORequest>email(@RequestBody UsuarioEmailDTORequest usuarioEmailDTORequest){
+    public ResponseEntity<UsuarioEmailDTOResponse> email(@RequestBody UsuarioEmailDTORequest usuarioEmailDTORequest){
         return ResponseEntity.ok(usuarioService.email(usuarioEmailDTORequest));
 
     }
-}
+
+    }

@@ -1,10 +1,13 @@
 package com.senac.ministock.service;
 
+import com.senac.ministock.config.SecurityConfiguration;
 import com.senac.ministock.dto.request.UsuarioDTORequest;
 import com.senac.ministock.dto.request.UsuarioEmailDTORequest;
 import com.senac.ministock.dto.response.UsuarioDTOResponse;
 import com.senac.ministock.dto.response.UsuarioDTOUpdateResponse;
 import com.senac.ministock.dto.response.UsuarioEmailDTOResponse;
+import com.senac.ministock.entity.Role;
+import com.senac.ministock.entity.RoleName;
 import com.senac.ministock.entity.Usuario;
 import com.senac.ministock.repository.UsuarioRepository;
 import com.senac.ministock.util.HashUtil;
@@ -18,6 +21,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +31,8 @@ public class    UsuarioService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtTokenService jwtTokenService;
+    @Autowired
+    private SecurityConfiguration securityConfiguration;
 
     private final UsuarioRepository usuarioRepository;
     private final ModelMapper modelMapper;
@@ -52,17 +58,38 @@ public class    UsuarioService {
     }
 
     @Transactional
-    public UsuarioDTOResponse criarUsuario(UsuarioDTORequest dto) {
-        if (usuarioRepository.existsByEmail(dto.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail já cadastrado");
+    public UsuarioDTOResponse criarUsuario(UsuarioDTORequest usuarioDTORequest) {
+        List<Role> roles = new ArrayList<Role>();
+        Role role = null;
+        for (int i = 0; i < usuarioDTORequest.getRolesList().size(); i++) {
+            role = new Role();
+            role.setName(RoleName.valueOf(usuarioDTORequest.getRolesList().get(i)));
+            roles.add(role);
         }
 
-
-        Usuario usuario = modelMapper.map(dto, Usuario.class);
-        usuario.setSenhaHash(HashUtil.gerarHash(dto.getSenha()));
-        Usuario salvo = usuarioRepository.save(usuario);
-        return modelMapper.map(salvo, UsuarioDTOResponse.class);
+        Usuario usuario = new Usuario();
+        usuario.setNome(usuarioDTORequest.getNome());
+        usuario.setEmail(usuarioDTORequest.getEmail());
+        usuario.setPerfil(usuarioDTORequest.getPerfil());
+        usuario.setSenhaHash(securityConfiguration.passwordEncoder().encode(usuarioDTORequest.getSenha()));
+        usuario.setStatus(usuarioDTORequest.getStatus());
+        usuario.setRoles(List.of(role));
+        Usuario usuarioSave = this.usuarioRepository.save(usuario);
+        UsuarioDTOResponse usuarioDTOResponse = modelMapper.map(usuarioSave, UsuarioDTOResponse.class);
+        return usuarioDTOResponse;
     }
+//    public UsuarioDTOResponse criarUsuario(UsuarioDTORequest dto) {
+//        if (usuarioRepository.existsByEmail(dto.getEmail())) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail já cadastrado");
+//        }
+//
+//
+//        Usuario usuario = modelMapper.map(dto, Usuario.class);
+//        usuario.setSenhaHash(HashUtil.gerarHash(dto.getSenha()));
+//        Usuario salvo = usuarioRepository.save(usuario);
+//        return modelMapper.map(salvo, UsuarioDTOResponse.class);
+//    }
+
 
     @Transactional
     public UsuarioDTOResponse atualizarUsuario(Integer id, UsuarioDTORequest dto) {
@@ -107,7 +134,7 @@ public class    UsuarioService {
         usuarioRepository.apagadoLogicoUsuario(id);
     }
 
-    public UsuarioEmailDTORequest email(UsuarioEmailDTORequest usuarioEmailDTORequest) {
+    public UsuarioEmailDTOResponse email(UsuarioEmailDTORequest usuarioEmailDTORequest) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(usuarioEmailDTORequest.getEmail(), usuarioEmailDTORequest.getSenha());
 
@@ -119,6 +146,6 @@ public class    UsuarioService {
         usuarioEmailDTOResponse.setId(userDetails.getIdUsuario());
         usuarioEmailDTOResponse.setNome(userDetails.getNomeUsuario());
         usuarioEmailDTOResponse.setToken(jwtTokenService.generateToken(userDetails));
-        return usuarioEmailDTORequest;
+        return usuarioEmailDTOResponse;
     }
 }

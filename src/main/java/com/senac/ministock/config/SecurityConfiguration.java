@@ -21,8 +21,10 @@ public class SecurityConfiguration {
     private UsuarioAuthenticationFilter usuarioAuthenticationFilter;
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
-            "/usuario/email",
-            "/usuario/criar",
+            "/api/usuario/email",
+            "/api/usuario/criar",
+
+
 
             "/v3/api-docs/**",
             "/swagger-ui/**",
@@ -31,7 +33,40 @@ public class SecurityConfiguration {
 
     // Endpoints que requerem autenticação para serem acessados
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
-            "/usuario/listar"
+            "/api/usuario/atualizar/{id}",
+            "/api/usuario/atualizarStatus/{id}",
+            "/api/usuario/listar",
+            "/api/usuario/listarPorId/{id}",
+            "/api/usuario/apagar/{id}",
+
+            "/api/produto/atualizar/{id}",
+            "/api/produto/criar",
+            "/api/produto/atualizarStatus/{id}",
+            "/api/produto/listar",
+            "/api/produto/listarPorId/{id}",
+            "/api/produto/apagar/{id}",
+
+            "/api/notificacao/atualizar/{id}",
+            "/api/notificacao/criar",
+            "/api/notificacao/marcarComoLida/{id}",
+            "/api/notificacao/atualizarStatus/{id}",
+            "/api/notificacao/listar",
+            "/api/notificacao/listarPorNotificacaoId/{id}",
+            "/api/notificacao/apagar/{id}",
+
+            "/api/movimentacoes_estoque/atualizar/{id}",
+            "/api/movimentacoes_estoque/criar",
+            "/api/movimentacoes_estoque/listar",
+            "/api/movimentacoes_estoque/apagar/{id}",
+
+            "/api/configuracao/atualizar/{configuracaoId}",
+            "/api/configuracao/criar",
+            "/api/configuracao/atualizarStatus/{configuracaoId}",
+            "/api/configuracao/listar",
+            "/api/configuracao/listarPorId/{configuracaoId}",
+            "/api/configuracao/apagar/{configuracaoId}",
+
+
     };
 
     // Endpoints que só podem ser acessador por usuários com permissão de cliente
